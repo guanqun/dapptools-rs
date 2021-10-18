@@ -91,7 +91,7 @@ impl<S: HostExt, Tr: Tracer> Evm<S> for EvmOdin<S, Tr> {
         #[allow(deprecated)]
         let message = Message {
             sender: from,
-            destination: to,
+            recipient: to,
             // What should this be?
             depth: 0,
             kind: self.call_kind.unwrap_or(CallKind::Call),
@@ -99,6 +99,7 @@ impl<S: HostExt, Tr: Tracer> Evm<S> for EvmOdin<S, Tr> {
             value,
             gas: self.gas_limit as i64,
             is_static,
+            code_address: to,
         };
 
         // get the bytecode at the host
